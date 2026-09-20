@@ -1,50 +1,65 @@
+import { useState } from "react";
 
 function App() {
+  const [Count, setCount] = useState(5);
+  const [obtainedmarks, setobtainedmarks] = useState(0);
+  const [totalmarks, setTotalmarks] = useState(0);
+  const [percentage, setPercentage] = useState(0);
+
+  function increment() {
+    if (Count < 20) {
+      setCount(Count + 1);
+    }
+  }
+
+  function decrement() {
+    if (Count > 0) {
+      setCount(Count - 1);
+    }
+  }
+
+  function calculate(e) {
+    e.preventDefault();
+
+    const calcPercentage = (obtainedmarks / totalmarks) * 100;
+
+    setPercentage(calcPercentage.toFixed(2));
+  }
+
   return (
     <div>
-      <h1>This is my first React App</h1>
+      <div>This is Counter Site</div>
 
-      <ul>
-        <li>Laptops</li>
-        <li>Mobile</li>
-        <li>Accessories</li>
-      </ul>
+      <h1>Counter : {Count}</h1>
 
-      <h2>My Table</h2>
+      <button onClick={increment}>Increment</button>
+      <button onClick={decrement}>Decrement</button>
 
-      <table border="1">
-        <tbody>
-          <tr>
-            <td>Ibraheem</td>
-            <td>19</td>
-            <td>Male</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <form>
+      <form onSubmit={calculate}>
         <div>
-          Name:
-          <input type="text" value="Ibraheem" readOnly />
+          <input
+            type="number"
+            id="obtainedmarks"
+            placeholder="Enter obtained marks"
+            onChange={(e) => setobtainedmarks(e.target.value)}
+          />
         </div>
 
         <div>
-          Age:
-          <input type="number" value="19" readOnly />
+          <input
+            type="number"
+            id="total"
+            placeholder="Enter total marks"
+            onChange={(e) => setTotalmarks(e.target.value)}
+          />
         </div>
 
-        <div>
-          Gender:
-          <input type="text" value="Male" readOnly />
-        </div>
-
-        <div>
-          <input type="submit" value="Submit" />
-        </div>
+        <button type="submit">Calculate</button>
       </form>
+
+      <h2>Percentage: {percentage}%</h2>
     </div>
   );
 }
 
 export default App;
-
