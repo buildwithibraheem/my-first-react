@@ -1,63 +1,116 @@
 import { useState } from "react";
 
 function App() {
-  const [Count, setCount] = useState(5);
-  const [obtainedmarks, setobtainedmarks] = useState(0);
-  const [totalmarks, setTotalmarks] = useState(0);
-  const [percentage, setPercentage] = useState(0);
 
-  function increment() {
-    if (Count < 20) {
-      setCount(Count + 1);
-    }
+  const [weight, setWeight] = useState(0);
+  const [height, setHeight] = useState(0);
+
+  const [principal, setPrincipal] = useState(0);
+  const [rate, setRate] = useState(0);
+  const [time, setTime] = useState(0);
+
+  const [length, setLength] = useState(0);
+  const [width, setWidth] = useState(0);
+
+
+  function calculateBMI() {
+    let bmi = weight / (height * height);
+
+    console.log("BMI = " + bmi);
   }
 
-  function decrement() {
-    if (Count > 0) {
-      setCount(Count - 1);
-    }
+
+  function calculateInterest() {
+    let interest = (principal * rate * time) / 100;
+
+    console.log("Interest = " + interest);
   }
 
-  function calculate(e) {
-    e.preventDefault();
 
-    const calcPercentage = (obtainedmarks / totalmarks) * 100;
+  function calculateArea() {
+    let area = length * width;
 
-    setPercentage(calcPercentage.toFixed(2));
+    console.log("Area = " + area);
   }
+
 
   return (
     <div>
-      <div>This is Counter Site</div>
 
-      <h1>Counter : {Count}</h1>
+      <div>BMI Calculator</div>
 
-      <button onClick={increment}>Increment</button>
-      <button onClick={decrement}>Decrement</button>
+      <form>
 
-      <form onSubmit={calculate}>
-        <div>
-          <input
-            type="number"
-            id="obtainedmarks"
-            placeholder="Enter obtained marks"
-            onChange={(e) => setobtainedmarks(e.target.value)}
-          />
-        </div>
+        <input
+          type="number"
+          placeholder="Enter weight"
+          onChange={(e) => setWeight(e.target.value)}
+        />
 
-        <div>
-          <input
-            type="number"
-            id="total"
-            placeholder="Enter total marks"
-            onChange={(e) => setTotalmarks(e.target.value)}
-          />
-        </div>
+        <input
+          type="number"
+          placeholder="Enter height"
+          onChange={(e) => setHeight(e.target.value)}
+        />
 
-        <button type="submit">Calculate</button>
+        <button type="button" onClick={calculateBMI}>
+          Calculate
+        </button>
+
       </form>
 
-      <h2>Percentage: {percentage}%</h2>
+
+      <div>Interest Calculator</div>
+
+      <form>
+
+        <input
+          type="number"
+          placeholder="Enter principal"
+          onChange={(e) => setPrincipal(e.target.value)}
+        />
+
+        <input
+          type="number"
+          placeholder="Enter rate"
+          onChange={(e) => setRate(e.target.value)}
+        />
+
+        <input
+          type="number"
+          placeholder="Enter time"
+          onChange={(e) => setTime(e.target.value)}
+        />
+
+        <button type="button" onClick={calculateInterest}>
+          Calculate
+        </button>
+
+      </form>
+
+
+      <div>Area Calculator</div>
+
+      <form>
+
+        <input
+          type="number"
+          placeholder="Enter length"
+          onChange={(e) => setLength(e.target.value)}
+        />
+
+        <input
+          type="number"
+          placeholder="Enter width"
+          onChange={(e) => setWidth(e.target.value)}
+        />
+
+        <button type="button" onClick={calculateArea}>
+          Calculate
+        </button>
+
+      </form>
+
     </div>
   );
 }
